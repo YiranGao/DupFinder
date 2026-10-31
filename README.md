@@ -107,3 +107,7 @@ src/
   MainForm.cs   WinForms 界面
   Program.cs    入口
 ```
+
+## 九、许可证
+
+MIT License，详见 [LICENSE](LICENSE)。

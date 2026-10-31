@@ -107,3 +107,7 @@ src/
   MainForm.cs   WinForms UI
   Program.cs    Entry point
 ```
+
+## 9. License
+
+MIT License — see [LICENSE](LICENSE).
