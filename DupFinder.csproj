@@ -8,6 +8,8 @@
     <AssemblyName>DupFinder</AssemblyName>
     <RootNamespace>DupFinder</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- 嵌为 Win32 图标资源：资源管理器、任务栏、窗体标题栏都用它；单文件 exe 依旧零依赖 -->
+    <ApplicationIcon>assets\DupFinder.ico</ApplicationIcon>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Company>PCXX</Company>
@@ -18,6 +20,11 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+
+  <!-- 同一份图标再嵌一份为托管资源，供运行时给窗体设置 Icon（含多尺寸缩放） -->
+  <ItemGroup>
+    <EmbeddedResource Include="assets\DupFinder.ico" LogicalName="DupFinder.ico" />
+  </ItemGroup>
 
   <!-- 仅构建期需要：提供 .NET Framework 4.8 引用程序集，不打包进产物 -->
   <ItemGroup>

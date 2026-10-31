@@ -71,12 +71,41 @@ namespace DupFinder
 
         #region 界面构建
 
+        /// <summary>
+        /// 窗体图标：优先用嵌入的多尺寸 ico（16~256），失败时回退到 exe 自身的 Win32 图标资源。
+        /// 有了它，标题栏、任务栏、Alt-Tab 才会显示 DupFinder 图标而不是默认程序图标。
+        /// </summary>
+        private void LoadAppIcon()
+        {
+            try
+            {
+                using (var s = typeof(Program).Assembly.GetManifestResourceStream("DupFinder.ico"))
+                {
+                    if (s != null)
+                    {
+                        Icon = new Icon(s);
+                        return;
+                    }
+                }
+            }
+            catch (Exception) { }
+
+            try
+            {
+                string exe = Application.ExecutablePath;
+                if (!string.IsNullOrEmpty(exe) && File.Exists(exe))
+                    Icon = Icon.ExtractAssociatedIcon(exe);
+            }
+            catch (Exception) { }
+        }
+
         private void BuildUi()
         {
             Text = "重名文件/文件夹清理工具  DupFinder 1.0";
             StartPosition = FormStartPosition.CenterScreen;
             Font = new Font(SystemFonts.MessageBoxFont.FontFamily, SystemFonts.MessageBoxFont.Size);
             AllowDrop = true;
+            LoadAppIcon();
 
             // 高分屏（125%/150%/200%+ 缩放）下：Screen.WorkingArea 是物理像素，
             // 而窗口 Size 是逻辑像素，必须先除以缩放系数，否则窗口物理尺寸会超出屏幕、
@@ -185,6 +214,7 @@ namespace DupFinder
                               " Location=" + Location);
                 sb.AppendLine("Screen=" + scr.DeviceName + " bounds=" + scr.Bounds + " workarea=" + scr.WorkingArea +
                               " scale=" + NativeDpi.ScaleForWindow(Handle));
+                sb.AppendLine("icon   = " + (Icon == null ? "null" : Icon.Width + "x" + Icon.Height));
                 sb.AppendLine("dir    = " + _dirPanel.Bounds);
                 sb.AppendLine("options= " + _optionsPanel.Bounds);
                 sb.AppendLine("tree   = " + _treeHost.Bounds);

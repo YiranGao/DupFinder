@@ -2,11 +2,13 @@
 
 [中文](README.md) | English
 
+<img src="assets/icon_preview.png" width="96" height="96" align="right" alt="DupFinder icon">
+
 DupFinder scans a folder, groups together the files and folders that **share the same name**, and lets you delete the ones you select — straight to the Recycle Bin, so everything stays recoverable.
 
 ## 1. Getting it
 
-- **Option A (recommended)**: download `DupFinder.exe` (~50 KB) from **Releases** and double-click it.
+- **Option A (recommended)**: download `DupFinder.exe` (~200 KB, embeds 9 icon sizes from 16 to 256) from **Releases** and double-click it.
 - **Option B**: build from source — install .NET SDK 6.0+ and run `build.bat`. Output lands in `dist\DupFinder.exe`.
 
 Runtime requirements: only the .NET Framework 4.0+ that already ships with Windows 10. **No .NET Runtime install, no third-party libraries, one single file.** You can also drag a folder onto the window to set the scan target.
@@ -108,6 +110,17 @@ src/
   Program.cs    Entry point
 ```
 
-## 9. License
+```
+tools/
+  gen_icon.py   Generates assets/DupFinder.ico (standard library only, see section 9)
+```
+
+## 9. Application icon
+
+- Icon file: `assets/DupFinder.ico`, with 9 sizes (16 / 20 / 24 / 32 / 40 / 48 / 64 / 128 / 256), 32bpp with alpha.
+- Regenerate it with `python tools/gen_icon.py` — a pure standard-library script (zlib + struct, SDF + supersampling), **no Pillow or any third-party package**. Rerun it and rebuild to pick up changes.
+- The icon is embedded as a Win32 resource via `ApplicationIcon`, so Explorer, the taskbar and Alt-Tab all show it. A managed copy is embedded too, so the form can pick the right size at runtime (48x48 at 150% scaling — no blurry upscale).
+
+## 10. License
 
 MIT License — see [LICENSE](LICENSE).

@@ -2,11 +2,13 @@
 
 [English](README_EN.md) | 中文
 
+<img src="assets/icon_preview.png" width="96" height="96" align="right" alt="DupFinder icon">
+
 扫描指定目录，找出**同名**的文件与文件夹，勾选后一键移入回收站（可恢复）。
 
 ## 一、获取程序
 
-- **方式 A（推荐）**：到本仓库右侧 **Releases** 下载 `DupFinder.exe`（约 50 KB），双击即用
+- **方式 A（推荐）**：到本仓库右侧 **Releases** 下载 `DupFinder.exe`（约 200 KB，含 16~256 共 9 种尺寸的图标），双击即用
 - **方式 B**：自己编译 —— 安装 .NET SDK 6.0+ 后运行 `build.bat`，产物在 `dist\DupFinder.exe`
 
 运行依赖：Windows 自带的 .NET Framework 4.0+（Win10 均已内置），**不需要安装 .NET Runtime，不需要任何第三方库**，单个文件即可运行。也可以把文件夹直接拖到窗口上作为扫描目录。
@@ -108,6 +110,17 @@ src/
   Program.cs    入口
 ```
 
-## 九、许可证
+```
+tools/
+  gen_icon.py   生成 assets/DupFinder.ico（纯标准库，见第九节）
+```
+
+## 九、程序图标
+
+- 图标文件：`assets/DupFinder.ico`，含 16 / 20 / 24 / 32 / 40 / 48 / 64 / 128 / 256 共 9 种尺寸，32bpp 带透明通道
+- 生成方式：`python tools/gen_icon.py` —— 纯 Python 标准库（zlib + struct）实现，用 SDF + 超采样绘制，**不依赖 Pillow 等任何第三方包**。改完脚本重新生成并编译即可生效
+- 图标经 csproj 的 `ApplicationIcon` 嵌进 exe 的 Win32 资源，所以资源管理器、任务栏、Alt-Tab 里都会显示；同时嵌了一份托管资源供运行时设置窗体图标，会按 DPI 自动挑选尺寸（150% 缩放下取 48×48，不会模糊）
+
+## 十、许可证
 
 MIT License，详见 [LICENSE](LICENSE)。
