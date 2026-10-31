@@ -1,12 +1,15 @@
 # DupFinder — 重名文件/文件夹清理工具
 
+[English](README_EN.md) | 中文
+
 扫描指定目录，找出**同名**的文件与文件夹，勾选后一键移入回收站（可恢复）。
 
-## 一、直接用（不需要装任何东西）
+## 一、获取程序
 
-- 可执行文件：`dist\DupFinder.exe`（约 50 KB，**单个文件**，拷到任何 Windows 10 电脑上双击即可运行）
-- 运行依赖：Windows 自带的 .NET Framework 4.0+（Win10 均已内置），**不需要安装 .NET Runtime，不需要任何第三方库**
-- 支持把文件夹直接拖到窗口上作为扫描目录
+- **方式 A（推荐）**：到本仓库右侧 **Releases** 下载 `DupFinder.exe`（约 50 KB），双击即用
+- **方式 B**：自己编译 —— 安装 .NET SDK 6.0+ 后运行 `build.bat`，产物在 `dist\DupFinder.exe`
+
+运行依赖：Windows 自带的 .NET Framework 4.0+（Win10 均已内置），**不需要安装 .NET Runtime，不需要任何第三方库**，单个文件即可运行。也可以把文件夹直接拖到窗口上作为扫描目录。
 
 ## 二、什么是「重名」
 
